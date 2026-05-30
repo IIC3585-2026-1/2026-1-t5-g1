@@ -1,13 +1,14 @@
 <template>
   <div class="layout">
-    <aside :class="['sidebar', { collapsed: isCollapsed }]">
+    <aside>
       <div class="sidebar-header">
         <h2>MyBooks</h2>
       </div>
       <nav class="sidebar-nav">
-        <router-link to="/" class="nav-item">Inicio</router-link>
-        <router-link to="/explore" class="nav-item">Explorar</router-link>
-        <router-link to="/library" class="nav-item">Biblioteca</router-link>
+        <RouterLink to="/" class="nav-item">Inicio</RouterLink>
+        <RouterLink to="/explore" class="nav-item">Explorar</RouterLink>
+        <RouterLink to="/library" class="nav-item">Biblioteca</RouterLink>
+        <RouterLink to="/roulette" class="nav-item">Ruleta</RouterLink>
       </nav>
     </aside>
     <main class="main-content">
