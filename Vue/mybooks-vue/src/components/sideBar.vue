@@ -57,14 +57,17 @@
   padding: 1rem;
   text-decoration: none;
   transition: background 0.2s;
+  color: black
 }
 
 .nav-item:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(180, 177, 172, 0.81);
 }
 
 .nav-item.router-link-active {
-  background: rgba(255,255,255,0.2);
+  background: rgba(107, 87, 54, 0.78);
+  font-weight: bold;
+  color: white;
 }
 
 @media (max-width: 768px) {
