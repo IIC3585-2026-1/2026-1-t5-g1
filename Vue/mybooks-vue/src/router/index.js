@@ -10,6 +10,7 @@ const routes = [
   { path: '/explore', component: ExplorerView },
   { path: '/library', component: LibraryView },
   { path: '/roulette', component: RouletteView }
+  
 ]
 
 export const router = createRouter({

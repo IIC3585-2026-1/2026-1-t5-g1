@@ -11,9 +11,6 @@
         <RouterLink to="/roulette" class="nav-item">Ruleta</RouterLink>
       </nav>
     </aside>
-    <main class="main-content">
-      <slot></slot>
-    </main>
   </div>
 </template>
 
@@ -68,11 +65,6 @@
 
 .nav-item.router-link-active {
   background: rgba(255,255,255,0.2);
-}
-
-.main-content {
-  flex: 1;
-  padding: 2rem;
 }
 
 @media (max-width: 768px) {

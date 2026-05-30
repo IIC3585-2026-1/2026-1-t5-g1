@@ -1,16 +1,26 @@
 <script setup>
-  import sideBar from "./components/sideBar.vue";
+  import SideBar from "./components/sideBar.vue";
 </script>
 
+
 <template>
-  <sideBar></sideBar>
-  <main>
-    <div class="sideBar_wrapper">
-      
-    </div>
-  </main>
+  <div class="layout">
+    <SideBar/>
+    <main class="main-content">
+      <RouterView/>
+    </main>
+  </div>
 </template>
 
-<style scoped>
 
+<style scoped>
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+}
 </style>
