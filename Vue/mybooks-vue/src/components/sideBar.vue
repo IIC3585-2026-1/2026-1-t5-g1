@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <aside>
+    <aside class="sidebar">
       <div class="sidebar-header">
         <h2>MyBooks</h2>
       </div>
