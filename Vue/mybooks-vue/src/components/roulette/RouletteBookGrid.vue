@@ -86,7 +86,6 @@ defineEmits(['toggle'])
   border-color: var(--gold); 
   background: var(--gold); 
 }
-
 @media (max-width: 760px) {
   .covers-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
