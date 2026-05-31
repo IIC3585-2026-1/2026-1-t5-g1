@@ -20,11 +20,11 @@
 
 <script setup>
 import { computed } from 'vue'
-import BookCover from './BookCover.vue'
+import BookCover from '../BookCover.vue'
 
 const props = defineProps({ book: { type: Object, default: null } })
 defineEmits(['close', 'start-reading'])
-const firstAuthor = computed(() => props.book?.authors?.[0] || 'Autor desconocido')
+const firstAuthor = computed(() => props.book?.authors?.[0] || props.book?.author || 'Autor desconocido')
 </script>
 
 <style scoped>

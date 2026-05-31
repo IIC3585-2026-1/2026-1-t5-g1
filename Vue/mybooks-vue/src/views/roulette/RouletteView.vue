@@ -39,13 +39,13 @@ import RouletteBookGrid from '../../components/roulette/RouletteBookGrid.vue'
 import RouletteEmptyState from '../../components/roulette/RouletteEmptyState.vue'
 import RouletteHeader from '../../components/roulette/RouletteHeader.vue'
 import RouletteModeSwitch from '../../components/roulette/RouletteModeSwitch.vue'
+import RouletteResultDialog from '../../components/roulette/RouletteResultDialog.vue'
 import RouletteShell from '../../components/roulette/RouletteShell.vue'
 import RouletteSpinPanel from '../../components/roulette/RouletteSpinPanel.vue'
-import RouletteResultDialog from '../../components/RouletteResultDialog.vue'
-import { useBooksStore } from '../../lib/booksStore'
+import { getByStatus, saveBook } from '../../storage/userStorage'
+import { normalizeStoredBooks } from '../../storage/bookMapper'
 
-const store = useBooksStore()
-const wishlistBooks = store.byStatus('wishlist')
+const wishlistBooks = computed(() => normalizeStoredBooks(getByStatus('wantToRead')))
 const mode = ref('all')
 const picked = ref(new Set())
 const selectedBook = ref(null)
@@ -80,7 +80,7 @@ function spin() {
 
 function startReading() {
   if (!selectedBook.value) return
-  store.moveBook(selectedBook.value.id, 'reading')
+  saveBook(selectedBook.value, 'reading')
   selectedBook.value = null
 }
 </script>

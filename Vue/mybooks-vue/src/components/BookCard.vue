@@ -18,7 +18,7 @@ const props = defineProps({
   },
 })
 
-const firstAuthor = computed(() => props.book.authors?.[0] || 'Autor desconocido')
+const firstAuthor = computed(() => props.book.authors?.[0] || props.book.author || 'Autor desconocido')
 </script>
 
 <style scoped>

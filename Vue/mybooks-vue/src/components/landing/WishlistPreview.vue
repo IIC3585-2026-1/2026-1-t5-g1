@@ -56,8 +56,9 @@ defineEmits(['explore', 'open-library'])
 }
 .book-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(170px, 190px));
   gap: 28px;
+  justify-content: start;
 }
 .clickable { cursor: pointer; }
 .gold-button,

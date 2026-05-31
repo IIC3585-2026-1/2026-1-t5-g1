@@ -20,16 +20,21 @@ import ContinueReadingCard from '../../components/landing/ContinueReadingCard.vu
 import LandingHero from '../../components/landing/LandingHero.vue'
 import LandingStats from '../../components/landing/LandingStats.vue'
 import WishlistPreview from '../../components/landing/WishlistPreview.vue'
-import { useBooksStore } from '../../lib/booksStore'
+import { books as storedBooks, getByStatus } from '../../storage/userStorage'
+import { normalizeStoredBooks } from '../../storage/bookMapper'
 
 const router = useRouter()
-const store = useBooksStore()
 
-const books = store.books
-const counts = store.counts
-const readingBooks = store.byStatus('reading')
-const wishlistBooks = store.byStatus('wishlist')
+const books = computed(() => normalizeStoredBooks(Object.values(storedBooks.value)))
+const readingBooks = computed(() => normalizeStoredBooks(getByStatus('reading')))
+const wishlistBooks = computed(() => normalizeStoredBooks(getByStatus('wantToRead')))
 const currentlyReading = computed(() => readingBooks.value[0])
+const counts = computed(() => ({
+  reading: getByStatus('reading').length,
+  read: getByStatus('read').length,
+  wishlist: getByStatus('wantToRead').length,
+  recommended: getByStatus('recommended').length,
+}))
 
 function goTo(path) {
   router.push(path)
