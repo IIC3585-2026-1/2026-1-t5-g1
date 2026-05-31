@@ -17,10 +17,26 @@
 .layout {
   display: flex;
   min-height: 100vh;
+  background: var(--paper);
 }
 
 .main-content {
   flex: 1;
-  padding: 3rem;
+  min-width: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 40px 56px;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    display: block;
+  }
+
+  .main-content {
+    height: auto;
+    min-height: 100vh;
+    padding: 24px;
+  }
 }
 </style>
