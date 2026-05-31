@@ -17,11 +17,29 @@
   const alreadyIn    = $derived(store.isInLibrary(book.id));
   const currentStatus = $derived(store.find(book.id)?.status);
 
+  let pendingStatus = $state<BookStatus | null>(null);
+  let endDate       = $state(new Date().toISOString().slice(0, 10));
+  let startDate     = $state(new Date().toISOString().slice(0, 10));
+
   function select(status: BookStatus) {
+    if (status == "read") {
+      pendingStatus = status;
+      return;
+    }
+    confirm(status);
+  }
+
+  function confirm(status: BookStatus) {
     if (alreadyIn) {
       store.move(book.id, status);
     } else {
       store.add({ ...book, status });
+    }
+    if (status === 'read') {
+      store.update(book.id, { endDate });
+    }
+    if (status == 'reading') {
+      store.update(book.id, { startDate })
     }
     onClose();
   }
@@ -51,30 +69,75 @@
       </div>
     </div>
 
-    <div style="font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; margin-bottom: 12px;">
-      {alreadyIn ? 'Mover a' : 'Agregar a'}
-    </div>
+    {#if pendingStatus === 'read'}
+      <!-- Paso de fecha -->
+      <div style="font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; margin-bottom: 12px;">
+        ¿Cuándo lo terminaste?
+      </div>
 
-    <div style="display: flex; flex-direction: column; gap: 8px;">
-      {#each statuses as status}
-        {@const meta = STATUS_META[status]}
-        {@const active = currentStatus === status}
+      <input
+        type="date"
+        bind:value={endDate}
+        max={new Date().toISOString().slice(0, 10)}
+        style="
+          width: 100%; padding: 12px 14px; border-radius: 12px;
+          border: 1px solid var(--line); background: var(--paper-2);
+          font-family: 'DM Sans', sans-serif; font-size: 15px;
+          color: var(--ink); margin-bottom: 12px;
+        "
+      />
+
+      <div style="display: flex; gap: 8px;">
         <button
-          onclick={() => select(status)}
+          onclick={() => pendingStatus = null}
           style="
-            display: flex; align-items: center; gap: 12px;
-            padding: 12px 14px; border-radius: 12px;
-            cursor: pointer; text-align: left;
-            background: {active ? 'var(--paper-3)' : 'var(--paper-2)'};
-            border: 1px solid {active ? meta.color : 'var(--line)'};
-            transition: all 0.12s ease;
+            flex: 1; padding: 12px; border-radius: 12px;
+            border: 1px solid var(--line); background: var(--paper-2);
+            font-family: 'DM Sans', sans-serif; font-size: 14px;
+            color: var(--ink-soft); cursor: pointer;
           "
         >
-          <span style="color: {meta.color};"><Icon name={meta.icon} size={18} /></span>
-          <span style="font-family: 'DM Sans', sans-serif; font-size: 14.5px; font-weight: 500; color: var(--ink); flex: 1;">{meta.label}</span>
-          {#if active}<Icon name="check" size={16} style="color: {meta.color}" />{/if}
+          Volver
         </button>
-      {/each}
-    </div>
+        <button
+          onclick={() => confirm('read')}
+          style="
+            flex: 2; padding: 12px; border-radius: 12px;
+            border: 1px solid var(--sage-deep); background: var(--sage-deep);
+            font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+            color: white; cursor: pointer;
+          "
+        >
+          Confirmar
+        </button>
+      </div>
+
+    {:else}
+      <div style="font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; margin-bottom: 12px;">
+        {alreadyIn ? 'Mover a' : 'Agregar a'}
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        {#each statuses as status}
+          {@const meta = STATUS_META[status]}
+          {@const active = currentStatus === status}
+          <button
+            onclick={() => select(status)}
+            style="
+              display: flex; align-items: center; gap: 12px;
+              padding: 12px 14px; border-radius: 12px;
+              cursor: pointer; text-align: left;
+              background: {active ? 'var(--paper-3)' : 'var(--paper-2)'};
+              border: 1px solid {active ? meta.color : 'var(--line)'};
+              transition: all 0.12s ease;
+            "
+          >
+            <span style="color: {meta.color};"><Icon name={meta.icon} size={18} /></span>
+            <span style="font-family: 'DM Sans', sans-serif; font-size: 14.5px; font-weight: 500; color: var(--ink); flex: 1;">{meta.label}</span>
+            {#if active}<Icon name="check" size={16} style="color: {meta.color}" />{/if}
+          </button>
+        {/each}
+      </div>
+    {/if}
   </div>
 </div>

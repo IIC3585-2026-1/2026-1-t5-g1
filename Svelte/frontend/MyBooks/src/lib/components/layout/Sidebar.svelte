@@ -9,6 +9,7 @@
     { path: '/biblioteca',          label: 'Mi biblioteca', icon: 'books'   },
     { path: '/biblioteca/wishlist', label: 'Quiero leer',   icon: 'heart'   },
     { path: '/ruleta',              label: 'Ruleta',        icon: 'dice', magic: true },
+    { path: '/estadisticas',        label: 'Estadísticas',  icon: 'chart',  },
   ];
 
   const currentPath = $derived($page.url.pathname);
