@@ -6,15 +6,15 @@
     </header>
 
     <div class="search-container"> 
-        <input type="search" placeholder="Busca por título, autor o tema..." id="site-search" name="q" />
-        <button @click="">Buscar</button>
+        <input v-model="query" type="search" placeholder="Busca por título, autor o tema..." id="site-search" />
+        <button @click="() => loadRandomBooks(false)">Buscar</button>
     </div>
 
     <div v-if="isLoading" class="loader-container">
         <span class="loader"></span>
     </div>
 
-    <div class="books-container">
+    <div v-if="!isLoading" class="books-container">
         <div class="book-card" v-for="book in books" :key="book.title">
             <img v-if="book.thumbnail_url" :src="book.thumbnail_url" :alt="book.title"/>
             <div v-else class="no-cover">Sin portada.</div>
@@ -25,19 +25,21 @@
 </template>
 
 <script setup> 
-    import { ref, onMounted } from 'vue'  // ← falta esto
+    import { ref, onMounted } from 'vue';
     
+    const query = ref("");
     const books = ref([]);
     const isLoading = ref(false);
     const API_URL = "https://openlibrary.org/search.json?";
     const subjects = ['fiction', 'fantasy', 'mystery', 'romance', 'science', 'history', 'thriller'];
     
 
-    const loadRandomBooks = async () => {
+    const loadRandomBooks = async (onmounted) => {
+        if (onmounted === false && !query.value.trim()) return;
         isLoading.value = true;
-        const randomSubject = subjects[Math.floor(Math.random() * subjects.length)];
+        const q = query.value.trim() ? query.value.trim() : subjects[Math.floor(Math.random() * subjects.length)];
         try {
-            const response = await fetch(`${API_URL}subject=${randomSubject}&limit=10`);
+            const response = await fetch(`${API_URL}q=${encodeURIComponent(q)}&limit=10`);
             const data = await response.json();
             
             books.value = data.docs.map((book) => {
@@ -55,7 +57,7 @@
     };
 
     onMounted(async () => {
-        await loadRandomBooks();
+        await loadRandomBooks(true);
     });
 
 </script>
@@ -98,9 +100,9 @@
 
 .book-card img {
     border-radius: 8px;
-    object-fit: cover;
+    object-fit: fill;
     width: 100%;
-    height: 260px;
+    height: 270px;
 }
 
 .loader-container {
