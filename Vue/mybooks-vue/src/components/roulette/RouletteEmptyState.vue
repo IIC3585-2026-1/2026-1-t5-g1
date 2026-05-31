@@ -1,7 +1,7 @@
 <template>
   <div class="empty-state">
     <h2>La ruleta necesita libros</h2>
-    <p>Agrega libros a tu wishlist y vuelve para dejar que el azar elija.</p>
+    <p>Agrega libros a tu wishlist y gira la ruleta.</p>
     <RouterLink to="/explore">Explorar libros</RouterLink>
   </div>
 </template>

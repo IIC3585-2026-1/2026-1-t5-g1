@@ -19,7 +19,7 @@
 
     <div v-else class="empty-state">
       <h2>Tu wishlist está vacía</h2>
-      <p>Explora el catálogo de OpenLibrary y guarda libros para que aparezcan aquí.</p>
+      <p>Explora y guarda libros para que aparezcan aquí.</p>
       <button type="button" class="gold-button" @click="$emit('explore')">Explorar libros</button>
     </div>
   </section>

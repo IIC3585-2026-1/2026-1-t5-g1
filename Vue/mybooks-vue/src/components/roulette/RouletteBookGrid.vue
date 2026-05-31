@@ -46,8 +46,14 @@ defineEmits(['toggle'])
   text-align: left;
   transition: opacity 0.18s ease, transform 0.18s ease, filter 0.18s ease;
 }
-.cover-option:disabled { cursor: default; }
-.cover-option.off { opacity: 0.34; filter: grayscale(0.55); transform: scale(0.96); }
+.cover-option:disabled { 
+  cursor: default; 
+}
+.cover-option.off { 
+  opacity: 0.34; 
+  filter: grayscale(0.55); 
+  transform: scale(0.96); 
+}
 .cover-option :deep(.cover) {
   border-radius: 18px;
   box-shadow: 0 18px 34px -18px rgba(0, 0, 0, 0.85);
@@ -76,7 +82,10 @@ defineEmits(['toggle'])
   color: var(--ink);
   font-weight: 900;
 }
-.cover-option:not(.off) .check { border-color: var(--gold); background: var(--gold); }
+.cover-option:not(.off) .check { 
+  border-color: var(--gold); 
+  background: var(--gold); 
+}
 @media (max-width: 760px) {
   .covers-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
