@@ -21,6 +21,6 @@
 
 .main-content {
   flex: 1;
-  padding: 2rem;
+  padding: 3rem;
 }
 </style>
