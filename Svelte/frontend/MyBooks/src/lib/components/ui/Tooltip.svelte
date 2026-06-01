@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
+  import Icon from './Icon.svelte';
 
   interface Props {
     month: string;
@@ -44,11 +45,7 @@
           background: var(--paper-3); display: flex;
           align-items: center; justify-content: center; flex-shrink: 0;
         ">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"
-            stroke="var(--ink-soft)" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="3,8 6.5,12 13,4"/>
-          </svg>
+          <Icon name="check" size={18}/>
         </div>
         <span style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--ink-soft); flex: 1;">Terminados</span>
         <span style="font-family: 'Newsreader', serif; font-size: 15px; font-weight: 700; color: var(--ink);">{finished}</span>
@@ -61,11 +58,7 @@
           background: var(--paper-3); display: flex;
           align-items: center; justify-content: center; flex-shrink: 0;
         ">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"
-            stroke="var(--ink-soft)" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 13V4M8 4C8 4 5 3 2 4v9c3-1 6 0 6 0M8 4c0 0 3-1 6 0v9c-3-1-6 0-6 0"/>
-          </svg>
+          <Icon name="reading" size={18}/>
         </div>
         <span style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--ink-soft); flex: 1;">Comenzados</span>
         <span style="font-family: 'Newsreader', serif; font-size: 15px; font-weight: 700; color: var(--ink);">{started}</span>
