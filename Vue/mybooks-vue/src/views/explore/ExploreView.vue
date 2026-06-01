@@ -32,23 +32,14 @@
     </div>
 
     <div v-if="!isLoading" class="books-container">
-        <div class="book-card" v-for="book in books" :key="book.title">
-            
-            <div class="card-image-wrapper">
-                <img v-if="book.thumbnail_url" :src="book.thumbnail_url" :alt="book.title"/>
-                <img v-else src="./../../assets/no-image.jpg" alt="Sin portada"/>
-                
-                <button class="menu-btn" @click.stop="openMenuId = openMenuId === book.id ? null : book.id">⋯</button>
-                
-                <div v-if="openMenuId === book.id" class="menu-dropdown">
-                    <button @click="saveBook(book, 'wantToRead'); openMenuId = null">Quiero leer</button>
-                    <button @click="saveBook(book, 'reading'); openMenuId = null">Leyendo</button>
-                    <button @click="saveBook(book, 'read'); openMenuId = null">Leído</button>
-                </div>
-            </div>
-            <p class="book-title"> {{book.title}} </p>
-            <p class="book-author"> {{book.author}} </p>
-        </div>
+        <BookCard
+            v-for="book in books"
+            :book="book"
+        >
+
+        <BookMenu :book="book"/>
+
+        </BookCard>
     </div>
 
     <div v-if="!isLoading && books.length" class="pagination">
@@ -60,9 +51,9 @@
 
 <script setup> 
     import { ref, onMounted, computed } from 'vue';
-    import { saveBook, getStatus } from './../../storage/userStorage.js'; 
+    import BookCard from "./../../components/BookCard.vue";
+    import BookMenu from "./../../components/BookMenu.vue";
     
-    const openMenuId = ref(null);
     const query = ref("");
     const books = ref([]);
     const isLoading = ref(false);
@@ -93,7 +84,7 @@
             books.value = data.docs.map((book) => {
                 return {
                     id: book.key.replace('/works/', ''),
-                    author: book.author_name?.join(", ") || "Autor desconocido",
+                    author: book.author_name?.[0] || "Autor desconocido",
                     title: book.title,
                     thumbnail_url: book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : null  
                 };
@@ -128,6 +119,19 @@
 </script>
 
 <style scoped>
+header h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(38px, 5vw, 56px);
+}
+
+p:last-child {
+  margin: 10px 0 0;
+  color: var(--ink-soft);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-style: italic;
+}
+
 .search-container {
     display: flex;
     width: 100%;
@@ -167,14 +171,6 @@
     padding: 1.5rem;
 }
 
-.book-card img {
-    border-radius: 12px;
-    object-fit: fill;
-    width: 100%;
-    height: 270px; 
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
 .loader-container {
     display: flex;
     justify-content: center;
@@ -192,15 +188,6 @@
 
 @keyframes spin {
     to { transform: rotate(360deg); }
-}
-
-.book-author {
-    font-size: 0.8rem;
-    color: rgba(107, 87, 54, 0.9);
-}
-
-.book-title {
-    font-weight: bold;
 }
 
 .filters {
@@ -267,53 +254,5 @@
 .pagination span {
     font-size: 0.9rem;
     color: #666;
-}
-
-.card-image-wrapper {
-    position: relative;
-}
-
-.menu-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: rgba(0,0,0,0.6);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.menu-dropdown {
-    position: absolute;
-    top: 44px;
-    right: 8px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 10;
-    overflow: hidden;
-}
-
-.menu-dropdown button {
-    display: block;
-    width: 100%;
-    padding: 0.6rem 1rem;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    text-align: left;
-    font-size: 0.85rem;
-    white-space: nowrap;
-}
-
-.menu-dropdown button:hover {
-    background: #f5f5f5;
 }
 </style>

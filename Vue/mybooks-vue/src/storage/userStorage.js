@@ -13,10 +13,15 @@ export const removeBook = (bookId) => {
     localStorage.setItem('mybooks', JSON.stringify(books.value));
 };
 
-export const getByStatus = (status) => {
-    return Object.values(books.value).filter(b => b.status === status);
+export const getByStatus = (status, limit = null) => {
+    const filtered = Object.values(books.value).filter(b => b.status === status);
+    return limit ? filtered.slice(-limit) : filtered;
 };
 
 export const getStatus = (bookId) => {
     return books.value[bookId]?.status || null;
 };
+
+export const getByStatusCount = (status) => {
+    return Object.values(books.value).filter(b => b.status === status).length;
+}
