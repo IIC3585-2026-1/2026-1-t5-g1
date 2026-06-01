@@ -48,6 +48,7 @@
         margin: 10px 0 0;
         max-width: 560px;
         line-height: 1.5;
+        font-style: italic;
       ">{sub}</p>
     {/if}
   </div>
