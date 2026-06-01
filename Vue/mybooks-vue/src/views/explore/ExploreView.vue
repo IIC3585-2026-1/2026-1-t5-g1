@@ -35,7 +35,11 @@
         <BookCard
             v-for="book in books"
             :book="book"
-        />
+        >
+
+        <BookMenu :book="book"/>
+
+        </BookCard>
     </div>
 
     <div v-if="!isLoading && books.length" class="pagination">
@@ -48,6 +52,7 @@
 <script setup> 
     import { ref, onMounted, computed } from 'vue';
     import BookCard from "./../../components/BookCard.vue";
+    import BookMenu from "./../../components/BookMenu.vue";
     
     const query = ref("");
     const books = ref([]);
@@ -79,7 +84,7 @@
             books.value = data.docs.map((book) => {
                 return {
                     id: book.key.replace('/works/', ''),
-                    author: book.author_name?.join(", ") || "Autor desconocido",
+                    author: book.author_name?.[0] || "Autor desconocido",
                     title: book.title,
                     thumbnail_url: book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : null  
                 };
@@ -114,6 +119,19 @@
 </script>
 
 <style scoped>
+header h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(38px, 5vw, 56px);
+}
+
+p:last-child {
+  margin: 10px 0 0;
+  color: var(--ink-soft);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-style: italic;
+}
+
 .search-container {
     display: flex;
     width: 100%;

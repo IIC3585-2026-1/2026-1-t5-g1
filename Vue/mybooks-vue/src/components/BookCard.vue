@@ -1,9 +1,13 @@
 <template>
   <article class="book-card">
     <BookCover :book="book" />
-    <h3>{{ book.title }}</h3>
-    <p>{{ firstAuthor }}</p>
-    <slot />
+    <div class="book-footer">
+        <div>
+            <h3>{{ book.title }}</h3>
+            <p>{{ firstAuthor }}</p>
+        </div>
+        <slot />
+    </div>
   </article>
 </template>
 
@@ -34,6 +38,14 @@ const firstAuthor = computed(() => props.book.authors?.[0] || props.book.author 
 .book-card:hover :deep(.cover) {
   box-shadow: 0 20px 38px -22px rgba(60, 44, 28, 0.6);
   transform: translateY(-4px);
+}
+
+.book-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 12px;
+  gap: 8px;
 }
 
 h3 {
