@@ -1,6 +1,6 @@
 import type { Book, CoverLayout } from './types';
 
-// ── Esquemas de color para portadas procedurales ─────
+// Colores portadas sin foto
 export const COVER_SCHEMES = [
   { bg: '#2F4032', ink: '#EFE7D2', accent: '#C2A05B' },
   { bg: '#5A2A2E', ink: '#F0E3D4', accent: '#D9A05B' },
@@ -18,7 +18,7 @@ export const COVER_SCHEMES = [
 
 export const COVER_LAYOUTS: CoverLayout[] = ['classic'];
 
-// ── Tipo que representa un resultado de Open Library ─
+// Tipo de Open Library
 export interface OLDoc {
   key:                     string;
   title:                   string;
@@ -30,7 +30,7 @@ export interface OLDoc {
   number_of_pages_median?: number;
 }
 
-// ── Convierte un resultado de OL a nuestro tipo Book ─
+// Se convierte de OLDoc a Book
 export function mapOLBook(doc: OLDoc): Book {
   const scheme = Math.floor(Math.random() * COVER_SCHEMES.length);
   const layout = COVER_LAYOUTS[Math.floor(Math.random() * COVER_LAYOUTS.length)];
