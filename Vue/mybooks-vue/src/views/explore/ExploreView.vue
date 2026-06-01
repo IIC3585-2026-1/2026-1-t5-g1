@@ -1,6 +1,6 @@
 <template>
     <header>
-        <p style="color:rgb(199, 111, 30)">EXPLORAR</p><br>
+        <p class="title">EXPLORAR</p><br>
         <h1>Descubre tu próxima lectura</h1>
         <p>Busca en el catálogo y guarda libros en tus listas.</p>
     </header>
@@ -122,6 +122,15 @@
 header h1 {
     font-family: Georgia, "Times New Roman", serif;
     font-size: clamp(38px, 5vw, 56px);
+    margin: 0;
+}
+
+.title {
+    color: var(--coffee);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
 }
 
 p:last-child {
