@@ -67,7 +67,7 @@
     {/each}
   </div>
 
-  <!-- ── Wishlist ──────────────────────────────────── -->
+  <!-- Wishlist -->
   <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px;">
     <h2 style="font-family: 'Newsreader', serif; font-size: 26px; font-weight: 500; color: var(--ink); margin: 0;">
       Quiero leer

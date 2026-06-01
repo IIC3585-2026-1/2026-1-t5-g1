@@ -7,7 +7,7 @@
   import Icon from '$lib/components/ui/Icon.svelte';
   import EmptyState from '$lib/components/layout/EmptyState.svelte';
 
-  // ── Estado ───────────────────────────────────────────
+  // Estado
   type Phase = 'select' | 'spinning' | 'result';
 
   let phase     = $state<Phase>('select');
@@ -30,7 +30,7 @@
     picked = new Set(wishlist.map(b => b.id));
   });
 
-  // ── Acciones ─────────────────────────────────────────
+  // Acciones
   function toggle(id: string) {
     const next = new Set(picked);
     next.has(id) ? next.delete(id) : next.add(id);
@@ -52,7 +52,7 @@
     winner = { book: win, reel };
     phase  = 'spinning';
 
-    // medir el contenedor DESPUÉS de que Svelte actualice el DOM
+    // medir el contenedor después de que Svelte actualice el DOM
     setTimeout(() => {
       const ITEM = 150; // cover 130px + gap 20px
       const cw   = reelEl?.offsetWidth ?? 880;
@@ -71,7 +71,7 @@
   }
 </script>
 
-<!-- ── Fondo oscuro de la ruleta ───────────────────── -->
+<!-- Fondo de la ruleta -->
 <div style="
   min-height: calc(100vh - 80px);
   background: radial-gradient(130% 100% at 50% -10%, #34432f 0%, var(--ink) 55%, #211c17 100%);
@@ -92,7 +92,7 @@
       </h1>
     </div>
 
-    <!-- ── FASE: SELECT ─────────────────────────────── -->
+    <!-- Fase: select -->
     {#if phase === 'select'}
       {#if wishlist.length === 0}
         <EmptyState
@@ -197,7 +197,7 @@
         </div>
       {/if}
 
-    <!-- ── FASE: SPINNING ───────────────────────────── -->
+    <!-- Fase: spinning -->
     {:else if phase === 'spinning' && winner}
       <div style="padding-top: 30px;">
         <div class="mb-pulse" style="font-family: 'DM Sans', sans-serif; font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); text-align: center; margin-bottom: 26px; font-weight: 600;">
@@ -239,7 +239,7 @@
         </div>
       </div>
 
-    <!-- ── FASE: RESULT ─────────────────────────────── -->
+    <!-- Fase: result -->
     {:else if phase === 'result' && winner}
       <div style="text-align: center; padding-top: 14px;">
         <h2 style="font-family: 'Newsreader', serif; font-style: italic; font-size: 26px; color: var(--paper); margin: 0 0 30px; font-weight: 400;">
