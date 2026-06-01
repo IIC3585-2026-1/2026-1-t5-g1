@@ -12,6 +12,8 @@ export function normalizeStoredBook(book, index = 0) {
     pages: book.pages || 0,
     published: book.published || '',
     progress: book.progress || 0,
+    startDate: book.startDate || '',
+    endDate: book.endDate || '',
   }
 }
 

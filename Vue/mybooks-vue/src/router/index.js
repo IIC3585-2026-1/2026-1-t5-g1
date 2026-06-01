@@ -5,13 +5,15 @@ import LandingView from './../views/landing/LandingView.vue';
 import LibraryView from './../views/library/LibraryView.vue';
 import LibraryStatusView from './../views/library/LibraryStatusView.vue';
 import RouletteView from './../views/roulette/RouletteView.vue';
+import StatisticsView from './../views/statistics/StatisticsView.vue';
 
 const routes = [
   { path: '/', component: LandingView },
   { path: '/explore', component: ExplorerView },
   { path: '/library', component: LibraryView },
   { path: '/library/:status', component: LibraryStatusView },
-  { path: '/roulette', component: RouletteView }
+  { path: '/roulette', component: RouletteView },
+  { path: '/statistics', component: StatisticsView }
 ];
 
 export const router = createRouter({

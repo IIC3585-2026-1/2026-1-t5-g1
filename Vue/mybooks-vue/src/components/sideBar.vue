@@ -21,6 +21,10 @@
         <span class="nav-icon" aria-hidden="true">▥</span>
         Mi biblioteca
       </RouterLink>
+      <RouterLink to="/statistics" class="nav-item">
+        <span class="nav-icon" aria-hidden="true">#</span>
+        Estadisticas
+      </RouterLink>
       <RouterLink to="/roulette" class="nav-item nav-accent">
         <span class="nav-icon" aria-hidden="true">✳</span>
         Ruleta
