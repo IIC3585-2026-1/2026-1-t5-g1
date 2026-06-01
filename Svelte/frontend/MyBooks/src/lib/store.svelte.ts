@@ -2,7 +2,7 @@ import type { Book, BookStatus } from './types';
 
 const STORAGE_KEY = 'mybooks_library';
 
-// ── Carga desde localStorage (o array vacío si es primera vez) ──
+// Carga los datos
 function loadBooks(): Book[] {
   if (typeof localStorage === 'undefined') return [];
   try {
@@ -13,11 +13,9 @@ function loadBooks(): Book[] {
   }
 }
 
-// ── Clase del store ──────────────────────────────────────────────
 class BooksStore {
   books = $state<Book[]>(loadBooks());
 
-  // ── Persistencia automática ──────────────────────────────────
   constructor() {
     $effect.root(() => {
       $effect(() => {
@@ -26,7 +24,6 @@ class BooksStore {
     });
   }
 
-  // ── Lecturas (derivadas) ─────────────────────────────────────
   byStatus(status: BookStatus): Book[] {
     return this.books.filter((b) => b.status === status);
   }
@@ -39,7 +36,6 @@ class BooksStore {
     return this.books.some((b) => b.id === id);
   }
 
-  // ── Escrituras (acciones) ────────────────────────────────────
   add(book: Book): void {
     if (!this.isInLibrary(book.id)) {
       this.books = [...this.books, book];

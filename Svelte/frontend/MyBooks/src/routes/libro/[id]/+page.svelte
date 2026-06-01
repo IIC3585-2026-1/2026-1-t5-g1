@@ -11,7 +11,7 @@
   const id = $derived($page.params.id ?? "");
   const book = $derived(store.find(id));
 
-  // ── Estado de edición ────────────────────────────
+  // Estado de edición
   let movingBook      = $state(false);
 
   function setRating(n: number) {
@@ -43,7 +43,7 @@
     }
   }
 
-  // ── Helpers ──────────────────────────────────────
+  // Helpers
 
   const today = new Date().toISOString().slice(0, 10);
 </script>

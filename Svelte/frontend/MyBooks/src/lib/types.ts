@@ -1,50 +1,38 @@
-// ── Tipo portada ────────────────────────────────
 export type CoverLayout = 'classic';
 
 export type BookStatus = 'reading' | 'read' | 'wishlist' | 'recommended';
 
-// ── Esquema de color para portadas procedurales ─────
+// Esquema para portadas sin foto
 export interface CoverScheme {
   bg:     string;   // color de fondo
   ink:    string;   // color de texto
-  accent: string;   // color de acento (líneas, detalles)
+  accent: string;   // color de líneas, detalles
 }
 
-// ── El libro ────────────────────────────────────────
 export interface Book {
   id:            string;
   title:         string;
   authors:       string[];
-
-  // portada procedural (siempre presente)
-  scheme:        number;       // índice en COVER_SCHEMES
+  scheme:        number;       
   layout:        CoverLayout;
-
-  // estado en la biblioteca
   status:        BookStatus;
-
-  // metadata
   categories:    string[];
-  language:      string;       // 'es' | 'en' | ...
+  language:      string;       
   pages:         number;
-  published:     string;       // año como string: '2021'
+  published:     string;       
   desc:          string;
   hasPreview:    boolean;
-
-  // registro personal
-  rating:        number;       // 0–5
-  progress:      number;       // 0–100 (%)
+  rating:        number;       
+  progress:      number;       
   comment:       string;
   recommendedBy: string;
-  startDate:     string;       // 'YYYY-MM-DD' o ''
+  startDate:     string;      
   endDate:       string;
-
-  // Open Library (cuando viene de búsqueda)
-  openLibraryKey?: string;     // '/works/OL123W'
-  coverId?:        number;     // ID de portada en OL
+  openLibraryKey?: string;     
+  coverId?:        number;     
 }
 
-// ── Metadata de cada estado ─────────────────────────
+// Metadata de cada estado 
 export interface StatusMeta {
   label: string;
   icon:  string;
